@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +19,8 @@ import lombok.Data;
 
 @Data
 @Entity
+@SQLDelete(sql = "UPDATE Course SET status = 'Inacti' WHERE id = ?")
+@Where(clause = "status = 'Acti'")
 public class Course {
 
 	@Id
@@ -30,11 +34,16 @@ public class Course {
 	@Column(length = 100, nullable = false)
 	private String name;
 
-	@NotBlank
 	@NotNull
 	@Length(max = 10)
 	@Pattern(regexp = "Back-end|Front-end")
 	@Column(length = 10, nullable = false)
 	private String category;
+
+	@NotNull
+	@Length(max = 10)
+	@Pattern(regexp = "Acti|Inacti")
+	@Column(length = 10, nullable = false)
+	private String status = "Acti";
 
 }
