@@ -47,7 +47,6 @@ export class CourseFormComponent {
     this.onCancel();
   }
 
-
   private onError() {
     this.snackBar.open('Error saving course', '', { duration: 3000 });
   }
@@ -68,7 +67,6 @@ export class CourseFormComponent {
       const requiredLength = field.errors ? field.errors['maxlength']['requiredLength'] : 100;
       return `The max length is ${requiredLength} characters`;
     }
-
 
     return 'Invalid field';
   }
