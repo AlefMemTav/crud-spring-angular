@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.loiane.model.Course;
+import com.loiane.dto.CourseDTO;
 import com.loiane.service.CourseService;
 
 import jakarta.validation.Valid;
@@ -34,24 +34,25 @@ public class CourseController {
 	}
 
 	@GetMapping
-	public @ResponseBody List<Course> list() {
+	public @ResponseBody List<CourseDTO> list() {
 		return courseService.list();
 	}
 
 	@GetMapping("/{id}")
-	public Course findById(@PathVariable @NotNull @Positive Long id) {
+	public CourseDTO findById(@PathVariable @NotNull @Positive Long id) {
 		return courseService.findById(id);
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Course create(@RequestBody @Valid Course course) {
-		return courseService.create(course);
+	public CourseDTO create(@RequestBody @Valid @NotNull CourseDTO courseDTO) {
+		return courseService.create(courseDTO);
 	}
 
 	@PutMapping("/{id}")
-	public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
-		return courseService.update(id, course);
+	public CourseDTO update(@PathVariable @NotNull @Positive Long id,
+			@RequestBody @Valid @NotNull CourseDTO courseDTO) {
+		return courseService.update(id, courseDTO);
 	}
 
 	@DeleteMapping("/{id}")
