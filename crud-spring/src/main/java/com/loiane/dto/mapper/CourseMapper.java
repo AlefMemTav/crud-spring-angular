@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.loiane.model.Course;
 import com.loiane.dto.CourseDTO;
+import com.loiane.enums.Category;
 
 @Component
 public class CourseMapper {
@@ -12,7 +13,7 @@ public class CourseMapper {
 		if (course == null) {
 			return null;
 		}
-		return new CourseDTO(course.getId(), course.getName(), course.getCategory());
+		return new CourseDTO(course.getId(), course.getName(), "frontend");
 	}
 
 	public Course toEntity(CourseDTO courseDTO) {
@@ -27,7 +28,7 @@ public class CourseMapper {
 			course.setName(courseDTO.name());
 		}
 		if (courseDTO.category() != null) {
-			course.setCategory(courseDTO.category());
+			course.setCategory(Category.FROTEND);
 		}
 		return course;
 	}
