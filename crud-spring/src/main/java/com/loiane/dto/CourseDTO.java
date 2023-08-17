@@ -1,5 +1,7 @@
 package com.loiane.dto;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,5 +16,6 @@ public record CourseDTO(
 		@NotBlank @NotNull @Length(min = 5, max = 100) 
 		String name,
 		@NotNull @Length(max = 10) @Pattern(regexp = "Back-end|Front-end") 
-		String category) {
+		String category, 
+		List<LessonDTO> lessons) {
 }
